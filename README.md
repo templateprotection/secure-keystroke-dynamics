@@ -6,11 +6,11 @@ The increased use of biometrics for authentication drives the need for sensitive
 
 # Files
 - **quantization_loss.py**: This script loads all embeddings and compares their euclidean distances to their quantized hamming distances. The output prints the equal error rates for both modes, as well as creates two score distribution plots to visualize the separability of genuine embeddings and imposter embeddings, before and after quantization.
-- **keystroke_runner.py**: This script loads all embeddings and performs authentication on each user using the FuzzyExtractor module. The result of each authentication (success or failure, genuine or imposter) is tracked, and overall metrics are calculated to judge the performance of the system.
-- **FuzzyExtractor.py**: Dr. Benjamin Fuller's fuzzy extractor module, with minor modifications.
+- **authentication_simulator.py**: This script loads all embeddings and performs authentication on each user using the FuzzyExtractor module. The result of each authentication (success or failure, genuine or imposter) is tracked, and overall metrics are calculated to judge the performance of the system.
+- **FuzzyExtractor.py**: An optimization of Dr. Benjamin Fuller's fuzzy extractor module, enhanced with numpy vectorization.
 - **FuzzyExtractorMock.py**: A trimmed, **unsafe** version of the FuzzyExtractor module which does not hash each locker. This is used solely for performance evaluation, as it provides authentication results at a much greater speed, but with zero security. 
 - **QuantizationUtils.py**: A utility module that contains common code between quantization_loss and keystroke_runner. Most importantly is the EmbeddingNormalizer, which is used to binarize embeddings. Other utility functions are in here as well, such as calculating equal error rate (EER), hamming distance between two binary vectors, and the random selection operations.
-- **total_genuine_embs.npy**: A numpy file which stores the embeddings of 1000 users, in the shape of 1000x15x128:
+- **embeddings_gen_1k.npy**: A numpy file which stores the embeddings of 1000 users, in the shape of 1000x15x128:
   - 1000: The number of distinct users
   - 15: The number of embeddings per user
   - 128: The size of each embedding
@@ -22,7 +22,7 @@ Unprotected Model:
 0.85% EER for 5 embeddings
 
 Protected Model:
-11.09% EER for 1 embedding
+11.29% EER for 1 embedding
 3.19% EER for 5 embeddings
 
 # Contact
